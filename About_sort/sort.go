@@ -18,7 +18,7 @@ func BubbleSort(arr []int) []int {
 }
 
 func SelectionSort(arr []int) []int {
-	// 选择排序，时间复杂度都是 O(n^2)
+	// 选择排序，时间复杂度都是 O(n^2)，不稳定
 	// 原理概述
 	// 1、先找到最大/小的元素，放在初始位置
 	// 2、再从剩余元素继续寻找最大/小的元素，放在已排序的末尾
@@ -32,6 +32,25 @@ func SelectionSort(arr []int) []int {
 			}
 		}
 		arr[i], arr[min_num] = arr[min_num], arr[i]
+	}
+	return arr
+}
+
+func InsertionSort(arr []int) []int {
+	// 插入排序，时间复杂度最坏 O(n^2)，最好 O(n)，稳定的排序算法
+	// 1、将第一个元素看成有序，后面的元素是未排序
+	// 2、从头到尾扫描未排序的序列，扫描每个元素，插入到有序序列的合适位置（如未排序和已排序的相等，则放在其后面）
+	len_arr := len(arr)
+	for i := 0; i < len_arr; i++ {
+		order := arr[i]
+		for j := i - 1; j >= 0; j-- {
+			if arr[j] > order {
+				arr[j], arr[j+1] = arr[j+1], arr[j]
+			} else {
+				arr[j+1] = order
+				break
+			}
+		}
 	}
 	return arr
 }
